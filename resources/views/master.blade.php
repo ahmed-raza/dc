@@ -12,9 +12,11 @@
   {!! HTML::script('js/select2.min.js') !!}
 </head>
 <body>
-  @include('partials.nav')
-  @include('partials.messages')
   <div class="container">
+    <div class="left-sidebar">
+      @include('partials.nav')
+    </div>
+    @include('partials.messages')
     @yield('content')
   </div>
   @include('partials.footer')
