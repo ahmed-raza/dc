@@ -15,12 +15,7 @@ class UserController extends Controller
     return view('user.profile', compact('user'));
   }
   public function myAds($id){
-    if (Auth::user()) {
-      $user = User::findOrFail($id);
-      return view('user.ads', compact('user'));
-    }
-    else{
-      return abort(401);
-    }
+    $user = User::findOrFail($id);
+    return view('user.ads', compact('user'));
   }
 }
