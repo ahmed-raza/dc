@@ -13,12 +13,18 @@
 </head>
 <body>
   <div class="container">
-    <div class="left-sidebar">
-      @include('partials.nav')
+    <div class="header">
+      @include('partials.menu')
     </div>
-    @include('partials.messages')
-    @yield('content')
+    <div class="sidebar">
+      @include('partials.sidebar')
+    </div>
+    <div class="content">
+      @yield('content')
+    </div>
+    <div class="footer">
+      @include('partials.footer')
+    </div>
   </div>
-  @include('partials.footer')
 </body>
 </html>

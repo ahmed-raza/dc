@@ -27,3 +27,9 @@ Route::get('/', ['as'=>'home', 'uses'=>'PagesController@home']);
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});
