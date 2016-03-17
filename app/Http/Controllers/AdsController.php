@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\AdsPostRequest;
+use App\Ads;
 use Auth;
 
 class AdsController extends Controller
@@ -53,7 +54,8 @@ class AdsController extends Controller
      */
     public function show($id)
     {
-        //
+        $ad = Ads::findOrFail($id);
+        return view('ads.show',compact('ad'));
     }
 
     /**
