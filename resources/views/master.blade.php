@@ -16,10 +16,9 @@
     <div class="header">
       @include('partials.menu')
     </div>
-    <div class="sidebar">
-      @include('partials.sidebar')
-    </div>
     <div class="content">
+      @include('partials.messages')
+      @include('partials.sidebar')
       @yield('content')
     </div>
     <div class="footer">
