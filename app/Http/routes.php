@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as'=>'home', 'uses'=>'PagesController@home']);
+Route::get('/', ['as'=>'home', 'uses'=>'HomeController@index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +24,12 @@ Route::get('/', ['as'=>'home', 'uses'=>'PagesController@home']);
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
+
+    Route::group(['prefix' => 'user'], function () {
+      Route::get('profile', ['as'=>'profile', 'uses'=>'UserController@profile']);
+    });
 });
