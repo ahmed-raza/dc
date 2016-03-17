@@ -7,7 +7,6 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Auth;
 
 class AuthController extends Controller
 {
@@ -29,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user/'. Auth::user()->id;
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.

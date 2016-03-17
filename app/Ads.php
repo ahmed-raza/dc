@@ -20,4 +20,12 @@ class Ads extends Model
     public function user(){
       return $this->belongsTo('App\User');
     }
+    /**
+    * An ad is owned by a user.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function category(){
+      return $this->belongsTo('App\Category');
+    }
 }
