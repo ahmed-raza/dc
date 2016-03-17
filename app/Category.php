@@ -10,6 +10,6 @@ class Category extends Model
     'name'
   ];
   public function ads(){
-    return $this->belongsToMany('App\Ads');
+    return $this->belongsToMany('App\Ad');
   }
 }

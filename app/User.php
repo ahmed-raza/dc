@@ -30,6 +30,6 @@ class User extends Authenticatable
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
     */
     public function ads(){
-        return $this->hasMany('App\Ads');
+        return $this->hasMany('App\Ad');
     }
 }

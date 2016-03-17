@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\AdsPostRequest;
-use App\Ads;
+use App\Ad;
 use Auth;
 
 class AdsController extends Controller
@@ -42,7 +42,8 @@ class AdsController extends Controller
      */
     public function store(AdsPostRequest $request)
     {
-        Auth::user()->ads()->create($request->all());
+        $ad = Auth::user()->ads()->create($request->all());
+        $ad->categories()->attach($request->input('category'));
         return redirect('/')->with('message', 'Ad created successfully. Please wait for an admin to approve it.');
     }
 
@@ -54,7 +55,7 @@ class AdsController extends Controller
      */
     public function show($id)
     {
-        $ad = Ads::findOrFail($id);
+        $ad = Ad::findOrFail($id);
         return view('ads.show',compact('ad'));
     }
 
