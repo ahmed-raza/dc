@@ -30,6 +30,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'HomeController@index');
 
     Route::group(['prefix' => 'user'], function () {
-      Route::get('profile', ['as'=>'profile', 'uses'=>'UserController@profile']);
+      Route::get('{id}', ['as'=>'profile', 'uses'=>'UserController@profile']);
+      Route::get('{id}/ads', ['as'=>'user.ads', 'uses'=>'UserController@myAds']);
     });
+    Route::resource('ad', 'AdsController');
 });

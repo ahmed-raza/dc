@@ -63,8 +63,9 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/user/ads') }}"><i class="fa fa-btn fa-camera-retro"></i>Ads</a></li>
-                                <li><a href="{{ url('/user/profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
+                                <li><a href="{{ route('user.ads', Auth::user()->id) }}"><i class="fa fa-btn fa-camera-retro"></i>My Ads</a></li>
+                                <li><a href="{{ route('ad.create') }}"><i class="fa fa-btn fa-camera-retro"></i>Post Ad</a></li>
+                                <li><a href="{{ route('profile', Auth::user()->id) }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>

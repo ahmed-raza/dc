@@ -4,7 +4,7 @@
 @section('content')
 
   <div class="container">
-    <h2>{{ Auth::user()->name }}</h2>
+    <h2>{{ $user->name }}</h2>
   </div>
 
 @stop
