@@ -76,6 +76,10 @@
         </div>
     </nav>
 
+    <div class="container">
+        @include('partials.messages')
+    </div>
+
     @yield('content')
 
     <!-- JavaScripts -->

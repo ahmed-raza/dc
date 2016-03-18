@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-md-4">
     {!! Form::label('category', 'Category') !!}
-    {!! Form::select('category[]', array('Phones', 'Laptops'), null, ['class'=>'form-control', 'id'=>'tag_list', 'multiple']) !!}
+    {!! Form::select('category_list[]', $categories, null, ['class'=>'form-control', 'id'=>'tag_list', 'multiple']) !!}
   </div>
 </div>
 <div class="row">

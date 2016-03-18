@@ -25,7 +25,7 @@ class AdsPostRequest extends Request
     {
         return [
             'title'=>'required',
-            'category'=>'required',
+            'category_list'=>'required',
             'city'=>'required',
             'description'=>'required',
         ];
