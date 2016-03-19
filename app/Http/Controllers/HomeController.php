@@ -16,4 +16,13 @@ class HomeController extends Controller
     {
         return view('home.home');
     }
+    /**
+     * Show the application contact.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function contact()
+    {
+        return view('pages.contact');
+    }
 }

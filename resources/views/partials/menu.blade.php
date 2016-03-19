@@ -14,6 +14,7 @@
       <ul class="nav navbar-nav">
         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Home</a></li>
         <li class="{{ Request::is('ad/create') ? 'active' : '' }}"><a href="{{ route('ad.create') }}">Post an Ad</a></li>
+        <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact Us</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
@@ -22,10 +23,12 @@
             <ul class="dropdown-menu">
               <li><a href="{{ route('profile', Auth::user()->id) }}">Profile</a></li>
               <li><a href="{{ route('user.ads', Auth::user()->id) }}">My Ads</a></li>
+              @if(Auth::user()->rank == 'admin')
               <li role="separator" class="divider"></li>
               <li class="dropdown-header">Admin</li>
               <li><a href="#">Separated link</a></li>
               <li><a href="#">One more separated link</a></li>
+              @endif
             </ul>
           </li>
           <li><a href="/logout">Logout</a></li>

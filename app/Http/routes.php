@@ -34,14 +34,6 @@ Route::group(['middleware' => 'web'], function () {
       Route::get('{id}/ads', ['as'=>'user.ads', 'uses'=>'UserController@myAds']);
     });
     Route::resource('ad', 'AdsController');
-    Route::get('mail', function(){
-      $data = array(
-          'name' => 'Laravel 5.2.22'
-        );
-      Mail::send('mail.template', $data, function($message){
-        $message->from('ahmed@creativefaze.com', 'Learning Laravel');
-        $message->to('raza1778@gmail.com')->subject("Laravel 5.2 Test Email");
-      });
-      return "Email sent to raza1778@gmail.com successfully.";
-    });
+    Route::get('contact', ['as'=>'contact', 'uses'=>'HomeController@contact']);
+    Route::post('send-mail', ['as'=>'send.mail', 'uses'=>'MailController@sendMail']);
 });
