@@ -16,12 +16,12 @@ class MailController extends Controller
       'subject'=>$request->input('subject'),
       'mailText'=>$request->input('message'),
     );
-    $send = Mail::send('mail.template', $data, function($message)use($request){
-      $message->from('ahmed@creativefaze.com', 'Daily Classifieds Contact Submission');
+    $send = Mail::send(['html' => 'mail.template'], $data, function($message)use($request){
+      $message->from('ahmed.raza@square63.com', 'Daily Classifieds Contact Submission');
       $message->to('raza1778@gmail.com')->subject($request->input('subject'));
     });
     if ($send) {
-      return redirect('contact')->with('mesasge', 'Message sent to our admins.');
+      return redirect('contact')->with('message', 'Message sent to our admins.');
     }
     else{
       return back()->withInput()->withErrors();
