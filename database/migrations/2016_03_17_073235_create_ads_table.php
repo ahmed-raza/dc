@@ -21,8 +21,8 @@ class CreateAdsTable extends Migration
             $table->string('city');
             $table->text('images');
             $table->text('description');
-            $table->boolean('status');
-            $table->boolean('approve');
+            $table->boolean('status')->default(1);
+            $table->boolean('approve')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')

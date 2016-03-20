@@ -9,7 +9,17 @@ class Ad extends Model
   protected $fillable = [
     'title',
     'city',
-    'description'
+    'description',
+    'approve',
+    'status'
+  ];
+  protected $attributes = [
+   'approve' => 0,
+   'status'  => 0,
+  ];
+  protected $casts = [
+   'approve' => 'boolean',
+   'status'  => 'boolean'
   ];
   public function user(){
     return $this->belongsTo('App\User');

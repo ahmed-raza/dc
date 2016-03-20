@@ -11,11 +11,6 @@
       <a class="navbar-brand" href="/">Daily Classifieds</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Home</a></li>
-        <li class="{{ Request::is('ad/create') ? 'active' : '' }}"><a href="{{ route('ad.create') }}">Post an Ad</a></li>
-        <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact Us</a></li>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
           <li class="dropdown">
@@ -40,3 +35,6 @@
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->
 </nav>
+<div class="container">
+  <a href="{{ route('ad.create') }}" class="btn btn-warning pull-right">Create an Ad</a>
+</div>

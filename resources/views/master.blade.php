@@ -9,7 +9,11 @@
   {!! HTML::style('css/style.css') !!}
   {!! HTML::script('js/jquery-1.11.1.js') !!}
   {!! HTML::script('js/bootstrap.js') !!}
+  @if(Auth::check() && Auth::user()->rank == 'admin')
   {!! HTML::script('ckeditor-full/ckeditor.js') !!}
+  @else
+  {!! HTML::script('ckeditor/ckeditor.js') !!}
+  @endif
   {!! HTML::script('js/select2.min.js') !!}
 </head>
 <body>

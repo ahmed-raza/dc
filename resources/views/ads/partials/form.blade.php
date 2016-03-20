@@ -23,6 +23,16 @@
   </div>
 </div>
 <div class="row">
+@if(Auth::user() && Auth::user()->rank == 'admin')
+  <div class="col-md-12">
+    {!! Form::checkbox('approve', 1, null, ['id'=>'approve']) !!} {!! Form::label('approve', 'Approve it') !!}
+  </div>
+@endif
+  <div class="col-md-12">
+    {!! Form::checkbox('status', 1, null, ['id'=>'status']) !!} {!! Form::label('status', 'Publish') !!}
+  </div>
+</div>
+<div class="row">
   <div class="col-md-12">
     {!! Form::submit($submitButtonText, ['class'=>'btn btn-success form-control']) !!}
   </div>
@@ -30,7 +40,7 @@
 @section('footer')
   <script>
   $('#tag_list').select2({
-    placeholder: 'Choose a tag',
+    placeholder: 'Choose category',
   });
   </script>
 @endsection
