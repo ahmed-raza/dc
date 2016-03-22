@@ -19,7 +19,7 @@ class Ad extends Model
   ];
   protected $casts = [
    'approve' => 'boolean',
-   'status'  => 'boolean'
+   'status'  => 'boolean',
   ];
   public function user(){
     return $this->belongsTo('App\User');

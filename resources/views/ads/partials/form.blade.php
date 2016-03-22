@@ -25,10 +25,12 @@
 <div class="row">
 @if(Auth::user() && Auth::user()->rank == 'admin')
   <div class="col-md-12">
+    {!! Form::hidden('approve', 0) !!}
     {!! Form::checkbox('approve', 1, null, ['id'=>'approve']) !!} {!! Form::label('approve', 'Approve it') !!}
   </div>
 @endif
   <div class="col-md-12">
+    {!! Form::hidden('status', 0) !!}
     {!! Form::checkbox('status', 1, null, ['id'=>'status']) !!} {!! Form::label('status', 'Publish') !!}
   </div>
 </div>
