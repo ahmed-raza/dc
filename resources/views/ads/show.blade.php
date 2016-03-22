@@ -4,15 +4,20 @@
 
   <h2>{{ $ad->title }}</h2>
   {{ ($ad->approve == 0) ? 'Needs approval from admin.' : '' }}
-  {!! Form::open(['url'=>'ad/'.$ad->id, 'method'=>'DELETE']) !!}
-  {!! Form::hidden('id', $ad->id); !!}
-  {!! Form::submit('delete', ['class'=>'btn btn-success']) !!}
-  {!! Form::close() !!}
-  <span>By:</span>
-  <em>{{ $ad->user->name }}</em>
-  <br>
-  <span>On:</span>
-  <em>{{ $ad->created_at }}</em>
+  <div class="auth-info">
+    <div class="group-right pull-right">
+      <div class="actions">
+        <a href="#">Edit</a>
+        <span>/</span>
+        <a href="#">Delete</a>
+      </div>
+    </div>
+    <div class="group-left">
+      <div class="username"> {{ $ad->user['name'] }} </div>
+      <div class="created-at">{{ $ad->created_at->diffForHumans() }}</div>
+    </div>
+  </div>
+  <hr>
   <div class="description">
     {!! $ad->description !!}
     @foreach($ad->categories as $category)
