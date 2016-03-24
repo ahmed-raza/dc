@@ -24,7 +24,7 @@ class AdsPostRequest extends Request
     public function rules()
     {
         return [
-            'title'=>'required',
+            'title'=>'required|unique:ads',
             'category_list'=>'required',
             'city'=>'required',
             'description'=>'required',

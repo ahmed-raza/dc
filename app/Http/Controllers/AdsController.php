@@ -56,9 +56,7 @@ class AdsController extends Controller
                 $value->move($imagePath, $imageName);
                 $image_names .= $imageName.",";
             }
-            DB::table('ads')
-            ->where('id', $ad->id)
-            ->update([
+            Ad::where('id', $ad->id)->update([
                 'images' => $image_names,
                 'slug'   => str_slug($ad->title, "-")
                 ]);
@@ -74,7 +72,7 @@ class AdsController extends Controller
      */
     public function show($id)
     {
-        $ad = Ad::findOrFail($id);
+        $ad = Ad::where('slug',$id)->first();
         return view('ads.show',compact('ad'));
     }
 
