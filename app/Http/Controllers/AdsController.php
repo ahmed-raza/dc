@@ -73,7 +73,8 @@ class AdsController extends Controller
     public function show($id)
     {
         $ad = Ad::where('slug',$id)->first();
-        return view('ads.show',compact('ad'));
+        $images = explode(',', $ad->images);
+        return view('ads.show',compact('ad', 'images'));
     }
 
     /**

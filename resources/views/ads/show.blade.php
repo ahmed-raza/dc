@@ -29,5 +29,12 @@
     @endforeach
     </ul>
   </div>
+  <div class="media">
+    @foreach($images as $image)
+      @unless($image == null)
+        <img src="/images/ads/{{ $ad->id }}/{{ $image }}" alt="">
+      @endunless
+    @endforeach
+  </div>
 
 @stop
