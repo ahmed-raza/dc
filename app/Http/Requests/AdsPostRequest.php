@@ -23,11 +23,25 @@ class AdsPostRequest extends Request
      */
     public function rules()
     {
-        return [
-            'title'=>'required|unique:ads',
-            'category_list'=>'required',
-            'city'=>'required',
-            'description'=>'required',
-        ];
+        switch ($this->method) {
+            case 'PATCH':
+                $rules = [
+                'title'=>'required',
+                'category_list'=>'required',
+                'city'=>'required',
+                'description'=>'required',
+                ];
+                break;
+
+            default:
+                $rules = [
+                'title'=>'required|unique:ads',
+                'category_list'=>'required',
+                'city'=>'required',
+                'description'=>'required',
+                ];
+                break;
+        }
+        return $rules;
     }
 }

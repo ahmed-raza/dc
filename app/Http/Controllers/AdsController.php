@@ -105,7 +105,7 @@ class AdsController extends Controller
       $ad = Ad::findOrFail($id);
       $ad->update($request->all());
       $ad->categories()->sync($request->input('category_list'));
-      return redirect('ad/'.$id)->with('message', 'Ad updated.');
+      return redirect('ad/'.$ad->slug)->with('message', 'Ad updated.');
     }
 
     /**
