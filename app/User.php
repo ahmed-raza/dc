@@ -32,4 +32,13 @@ class User extends Authenticatable
     public function ads(){
         return $this->hasMany('App\Ad');
     }
+
+    /*
+    * A user can have many articles.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function rank(){
+        return $this->rank;
+    }
 }

@@ -22,6 +22,9 @@
   </div>
   <div class="container">
     <div class="content">
+      <div class="post-ad">
+        <a href="{{ route('ad.create') }}" class="btn btn-warning pull-right">Create an Ad</a>
+      </div>
       @include('partials.messages')
       @include('partials.sidebar')
       @yield('content')

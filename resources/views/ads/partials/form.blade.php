@@ -17,6 +17,12 @@
   </div>
 </div>
 <div class="row">
+  <div class="col-md-4">
+    {!! Form::label('Images') !!}
+    {!! Form::file('images[]', ['multiple'=>true]) !!}
+  </div>
+</div>
+<div class="row">
   <div class="col-md-12">
     {!! Form::label('Description') !!}
     {!! Form::textarea('description', null, ['class'=>'ckeditor', 'required']) !!}

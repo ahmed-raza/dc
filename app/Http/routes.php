@@ -34,6 +34,7 @@ Route::group(['middleware' => 'web'], function () {
       Route::get('{id}/ads', ['as'=>'user.ads', 'uses'=>'UserController@myAds']);
     });
     Route::resource('ad', 'AdsController');
+    Route::get('ad/{id}/delete', 'AdsController@delete');
     Route::get('contact', ['as'=>'contact', 'uses'=>'HomeController@contact']);
     Route::post('send-mail', ['as'=>'send.mail', 'uses'=>'MailController@sendMail']);
 });

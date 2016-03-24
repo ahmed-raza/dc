@@ -35,6 +35,3 @@
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->
 </nav>
-<div class="container">
-  <a href="{{ route('ad.create') }}" class="btn btn-warning pull-right">Create an Ad</a>
-</div>

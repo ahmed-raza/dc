@@ -5,24 +5,29 @@
   <h2>{{ $ad->title }}</h2>
   {{ ($ad->approve == 0) ? 'Needs approval from admin.' : '' }}
   <div class="auth-info">
-    <div class="group-right pull-right">
-      <div class="actions">
-        <a href="#">Edit</a>
-        <span>/</span>
-        <a href="#">Delete</a>
+    @if(Auth::user()->id == $ad->user['id'] || Auth::user()->rank == 'admin')
+      <div class="group-right pull-right">
+        <div class="actions">
+          {!! HTML::link('ad/'.$ad->id.'/edit', "Edit") !!}
+          <span>/</span>
+          {!! HTML::link('ad/'.$ad->id.'/delete', "Delete") !!}
+        </div>
       </div>
-    </div>
+    @endif
     <div class="group-left">
-      <div class="username"> {{ $ad->user['name'] }} </div>
+      <div class="username"><strong> {{ $ad->user['name'] }} </strong></div>
       <div class="created-at">{{ $ad->created_at->diffForHumans() }}</div>
     </div>
   </div>
   <hr>
   <div class="description">
     {!! $ad->description !!}
+    <strong>Categories:</strong>
+    <ul>
     @foreach($ad->categories as $category)
-      <span>{!! HTML::link('tags/'.$category->id, $category->name) !!},</span>
+      <li>{!! HTML::link($category->slug, $category->name) !!}</li>
     @endforeach
+    </ul>
   </div>
 
 @stop
