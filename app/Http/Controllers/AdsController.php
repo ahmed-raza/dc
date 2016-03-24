@@ -56,6 +56,12 @@ class AdsController extends Controller
                 $value->move($imagePath, $imageName);
                 $image_names .= $imageName.",";
             }
+            DB::table('ads')
+            ->where('id', $ad->id)
+            ->update([
+                'images' => $image_names,
+                'slug'   => str_slug($ad->title, "-")
+                ]);
         }
         return redirect('user/'.Auth::user()->id.'/ads')->with('message', 'Ad created successfully. Please wait for an admin to approve it.');
     }

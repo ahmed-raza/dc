@@ -17,7 +17,6 @@ class CreateAdsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('title');
             $table->string('slug');
-            $table->string('category');
             $table->string('city');
             $table->text('images');
             $table->text('description');
