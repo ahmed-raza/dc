@@ -58,9 +58,11 @@ class AdsController extends Controller
             }
             Ad::where('id', $ad->id)->update([
                 'images' => $image_names,
-                'slug'   => str_slug($ad->title, "-")
                 ]);
         }
+        Ad::where('id', $ad->id)->update([
+            'slug'   => str_slug($ad->title, "-")
+            ]);
         return redirect('user/'.Auth::user()->id.'/ads')->with('message', 'Ad created successfully. Please wait for an admin to approve it.');
     }
 
