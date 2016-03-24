@@ -47,7 +47,7 @@ class AdsController extends Controller
     {
         $ad = Auth::user()->ads()->create($request->all());
         $ad->categories()->attach($request->input('category_list'));
-        if ($request->file('images') != null) {
+        if ($request->file('images')[0] != null) {
             $images = $request->file('images');
             $image_names = "";
             foreach ($images as $key => $value) {
