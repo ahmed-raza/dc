@@ -3,7 +3,13 @@
 @section('content')
 
   <h2>Daily Classifieds</h2>
-  @if(Carbon\Carbon::now()->format('m-d') < Carbon\Carbon::createFromDate(1, 18)->format('m-d'))
-  <span>Your birthday is gone!</span>
-  @endif
+  @foreach($ads as $ad)
+
+    <div class="col-md-4">
+      <div class="group-header">
+        <div class="image"><img src="/images/ads/{{ $ad->id }}/{{ explode(',', $ad->images)[0] }}" alt="" width="320" height="200"></div>
+      </div>
+    </div>
+
+  @endforeach
 @stop

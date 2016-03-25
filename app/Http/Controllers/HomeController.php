@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Ad;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.home');
+        $ads = Ad::take(6)->get();
+        return view('home.home', compact('ads'));
     }
     /**
      * Show the application contact.

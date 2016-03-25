@@ -49,15 +49,16 @@ class AdsController extends Controller
         $ad->categories()->attach($request->input('category_list'));
         if ($request->file('images')[0] != null) {
             $images = $request->file('images');
-            $image_names = "";
+            $image_names = [];
             foreach ($images as $key => $value) {
                 $imageName = $request->get('title') . "_" . time() . "_(". $key .").". $value->getClientOriginalExtension();
                 $imagePath = base_path() . '/public/images/ads/'.$ad->id.'/';
                 $value->move($imagePath, $imageName);
-                $image_names .= $imageName.",";
+                $image_names[] = $imageName;
+                $storeNames = implode(',', $image_names);
             }
             Ad::where('id', $ad->id)->update([
-                'images' => $image_names,
+                'images' => $storeNames,
                 ]);
         }
         Ad::where('id', $ad->id)->update([
