@@ -10,6 +10,7 @@ use App\Ad;
 use App\Category;
 use Auth;
 use DB;
+use Image;
 
 class AdsController extends Controller
 {
@@ -54,6 +55,11 @@ class AdsController extends Controller
                 $imageName = $request->get('title') . "_" . time() . "_(". $key .").". $value->getClientOriginalExtension();
                 $imagePath = base_path() . '/public/images/ads/'.$ad->id.'/';
                 $value->move($imagePath, $imageName);
+                $img = Image::make($imagePath.$imageName);
+                $thumbName = "t-" . $imageName;
+                $img->crop(100, 100, 25, 25);
+                $img->resize(320, 240);
+                $img->save($imagePath.$thumbName);
                 $image_names[] = $imageName;
                 $storeNames = implode(',', $image_names);
             }
