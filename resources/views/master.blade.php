@@ -15,6 +15,7 @@
   {!! HTML::script('ckeditor/ckeditor.js') !!}
   @endif
   {!! HTML::script('js/select2.min.js') !!}
+  {!! HTML::script('js/custom.js') !!}
 </head>
 <body>
   <div class="header">

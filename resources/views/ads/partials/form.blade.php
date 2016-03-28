@@ -1,25 +1,40 @@
-<div class="row">
-  <div class="col-md-4">
-    {!! Form::label('Title') !!}
-    {!! Form::text('title', null, ['class'=>'form-control', 'required']) !!}
+<div class="col-md-6">
+  <div class="row">
+    <div class="">
+      {!! Form::label('Title') !!}
+      {!! Form::text('title', null, ['class'=>'form-control', 'required']) !!}
+    </div>
+  </div>
+  <div class="row">
+    <div class="">
+      {!! Form::label('category', 'Category') !!}
+      {!! Form::select('category_list[]', $categories, null, ['class'=>'form-control', 'id'=>'tag_list', 'multiple']) !!}
+    </div>
+  </div>
+  <div class="row">
+    <div class="">
+      {!! Form::label('City') !!}
+      {!! Form::text('city', null, ['class'=>'form-control', 'required']) !!}
+    </div>
+  </div>
+  <div class="row">
+    <div class="">
+      {!! Form::label('Images') !!}
+      {!! Form::file('images[]', ['multiple'=>true]) !!}
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-4">
-    {!! Form::label('category', 'Category') !!}
-    {!! Form::select('category_list[]', $categories, null, ['class'=>'form-control', 'id'=>'tag_list', 'multiple']) !!}
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    {!! Form::label('City') !!}
-    {!! Form::text('city', null, ['class'=>'form-control', 'required']) !!}
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    {!! Form::label('Images') !!}
-    {!! Form::file('images[]', ['multiple'=>true]) !!}
+<div class="col-md-6">
+  <div class="images">
+    @foreach($images as $image)
+    <div class="thumb">
+      <img src="/images/ads/{{ $ad->id }}/t-{{ $image }}" alt="">
+      <div class="overlay">
+        <span class="remove">remove</span>
+      </div>
+    </div>
+    @endforeach
+    {!! Form::hidden('removeImages', '' , ['id'=>"removeImages"]) !!}
   </div>
 </div>
 <div class="row">

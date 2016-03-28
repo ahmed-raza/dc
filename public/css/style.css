@@ -4,3 +4,15 @@
 .post-ad {
   padding-bottom: 40px;
 }
+.thumb {
+  float: left;
+  padding-right: 10px;
+}
+.thumb img {
+  width: 150px;
+  height: 120px;
+}
+.overlay .remove {
+  text-decoration: underline;
+  cursor: pointer;
+}

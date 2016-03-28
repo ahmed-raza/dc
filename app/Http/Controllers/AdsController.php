@@ -96,8 +96,9 @@ class AdsController extends Controller
     {
         $ad = Ad::findOrFail($id);
         $categories = Category::lists('name', 'id');
+        $images = explode(',', $ad->images);
         if($ad->user['id'] == Auth::user()->id || Auth::user()->rank == 'admin'):
-            return view('ads.edit', compact('ad', 'categories'));
+            return view('ads.edit', compact('ad', 'categories', 'images'));
         else:
             return back()->with('error', 'You are not authorize to access that page.');
         endif;
@@ -113,9 +114,25 @@ class AdsController extends Controller
     public function update(AdsPostRequest $request, $id)
     {
       $ad = Ad::findOrFail($id);
-      $ad->update($request->all());
-      $ad->categories()->sync($request->input('category_list'));
-      return redirect('ad/'.$ad->slug)->with('message', 'Ad updated.');
+      // $ad->update($request->all());
+      // $ad->categories()->sync($request->input('category_list'));
+      // return redirect('ad/'.$ad->slug)->with('message', 'Ad updated.');
+        if ($request->get("removeImages")) {
+            $removeImages = explode(',', $request->get("removeImages"));
+            $images = explode(',', $ad->images);
+            foreach ($removeImages as $key => $value) {
+                $findInArray = array_search($value, $images);
+                if ($findInArray !== false) {
+                    unset($images[$key]);
+                    $imploded = implode(',', $images);
+                    dd($images);
+                    Ad::where('id', $ad->id)->update([
+                        'images' => $imploded,
+                        ]);
+                    unlink(base_path().'/public/images/ads/'.$ad->id.'/'.$value);
+                }
+            }
+        }
     }
 
     /**
