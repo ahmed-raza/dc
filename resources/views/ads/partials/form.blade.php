@@ -24,19 +24,23 @@
     </div>
   </div>
 </div>
-<div class="col-md-6">
-  <div class="images">
-    @foreach($images as $image)
-    <div class="thumb">
-      <img src="/images/ads/{{ $ad->id }}/t-{{ $image }}" alt="">
-      <div class="overlay">
-        <span class="remove">remove</span>
-      </div>
+@if(isset($adImages))
+  <div class="col-md-6">
+    <div class="images">
+      @foreach($adImages as $image)
+        @if(!empty($image))
+          <div class="thumb">
+            <img src="/images/ads/{{ $ad->id }}/t-{{ $image }}" alt="">
+            <div class="overlay">
+              <span class="remove">remove</span>
+            </div>
+          </div>
+        @endif
+      @endforeach
+      {!! Form::hidden('removeImages', '' , ['id'=>"removeImages"]) !!}
     </div>
-    @endforeach
-    {!! Form::hidden('removeImages', '' , ['id'=>"removeImages"]) !!}
   </div>
-</div>
+@endif
 <div class="row">
   <div class="col-md-12">
     {!! Form::label('Description') !!}

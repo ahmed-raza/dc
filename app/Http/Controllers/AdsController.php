@@ -96,9 +96,9 @@ class AdsController extends Controller
     {
         $ad = Ad::findOrFail($id);
         $categories = Category::lists('name', 'id');
-        $images = explode(',', $ad->images);
+        $adImages = explode(',', $ad->images);
         if($ad->user['id'] == Auth::user()->id || Auth::user()->rank == 'admin'):
-            return view('ads.edit', compact('ad', 'categories', 'images'));
+            return view('ads.edit', compact('ad', 'categories', 'adImages'));
         else:
             return back()->with('error', 'You are not authorize to access that page.');
         endif;
@@ -114,25 +114,44 @@ class AdsController extends Controller
     public function update(AdsPostRequest $request, $id)
     {
       $ad = Ad::findOrFail($id);
-      // $ad->update($request->all());
-      // $ad->categories()->sync($request->input('category_list'));
-      // return redirect('ad/'.$ad->slug)->with('message', 'Ad updated.');
-        if ($request->get("removeImages")) {
-            $removeImages = explode(',', $request->get("removeImages"));
-            $images = explode(',', $ad->images);
-            foreach ($removeImages as $key => $value) {
-                $findInArray = array_search($value, $images);
-                if ($findInArray !== false) {
-                    unset($images[$key]);
-                    $imploded = implode(',', $images);
-                    dd($images);
-                    Ad::where('id', $ad->id)->update([
-                        'images' => $imploded,
-                        ]);
-                    unlink(base_path().'/public/images/ads/'.$ad->id.'/'.$value);
-                }
+      $ad->update($request->all());
+      $ad->categories()->sync($request->input('category_list'));
+        if ($request->file('images')[0] != null) {
+            $images = $request->file('images');
+            $image_names = [];
+            foreach ($images as $key => $value) {
+                $imageName = $request->get('title') . "_" . time() . "_(". $key .").". $value->getClientOriginalExtension();
+                $imagePath = base_path() . '/public/images/ads/'.$ad->id.'/';
+                $value->move($imagePath, $imageName);
+                $img = Image::make($imagePath.$imageName);
+                $thumbName = "t-" . $imageName;
+                $img->crop(100, 100, 25, 25);
+                $img->resize(320, 240);
+                $img->save($imagePath.$thumbName);
+                $image_names[] = $imageName;
+                $storeNames = implode(',', $image_names);
+            }
+            Ad::where('id', $ad->id)->update([
+                'images' => $storeNames,
+                ]);
+        }
+      if ($request->get("removeImages")) {
+        $removeImages = explode(',', $request->get("removeImages"));
+        $images = explode(',', $ad->images);
+        foreach ($removeImages as $key => $value) {
+            $key = array_search($value, $images);
+            if ($key !== false) {
+                unset($images[$key]);
+                $imploded = implode(',', $images);
+                Ad::where('id', $ad->id)->update([
+                    'images' => $imploded,
+                    ]);
+                unlink(base_path().'/public/images/ads/'.$ad->id.'/'.$value);
+                unlink(base_path().'/public/images/ads/'.$ad->id.'/'."t-".$value);
             }
         }
+    }
+      return redirect('ad/'.$ad->slug)->with('message', 'Ad updated.');
     }
 
     /**
