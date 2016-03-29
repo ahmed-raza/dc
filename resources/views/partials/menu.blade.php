@@ -21,8 +21,10 @@
               @if(Auth::user()->rank == 'admin')
               <li role="separator" class="divider"></li>
               <li class="dropdown-header">Admin</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
+              <li><a href="#">All Ads</a></li>
+              <li><a href="#">All Users</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/logout">Logout</a></li>
               @endif
             </ul>
           </li>
