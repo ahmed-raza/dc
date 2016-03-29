@@ -129,7 +129,11 @@ class AdsController extends Controller
                 $img->resize(320, 240);
                 $img->save($imagePath.$thumbName);
                 $image_names[] = $imageName;
-                $storeNames = implode(',', $image_names);
+                if ($ad->images != null) {
+                    $storeNames = $ad->images.','.implode(',', $image_names);
+                }else{
+                    $storeNames = implode(',', $image_names);
+                }
             }
             Ad::where('id', $ad->id)->update([
                 'images' => $storeNames,
