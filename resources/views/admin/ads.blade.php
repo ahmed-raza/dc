@@ -5,9 +5,12 @@
   <h2>All Ads</h2>
 
   <div class="search-ads">
+  <fieldset>
+    <legend>Filtration</legend>
     {!! Form::open(['url'=>'admin/all-ads', 'method'=>'POST']) !!}
       @include('admin.partials.search-form')
     {!! Form::close() !!}
+  </fieldset>
   </div>
 
   <table class="table table-hover">
