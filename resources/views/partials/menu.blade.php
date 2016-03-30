@@ -21,7 +21,7 @@
               @if(Auth::user()->rank == 'admin')
               <li role="separator" class="divider"></li>
               <li class="dropdown-header">Admin</li>
-              <li><a href="#">All Ads</a></li>
+              <li><a href="{{ route('ads') }}">All Ads</a></li>
               <li><a href="#">All Users</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="/logout">Logout</a></li>

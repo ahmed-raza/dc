@@ -35,4 +35,7 @@ class Ad extends Model
   public function getCategoryListAttribute(){
     return $this->categories->lists('id')->all();
   }
+  public function unapprovedAds(){
+    return dd($this);
+  }
 }

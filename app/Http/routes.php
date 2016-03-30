@@ -33,6 +33,10 @@ Route::group(['middleware' => 'web'], function () {
       Route::get('{id}', ['as'=>'profile', 'uses'=>'UserController@profile']);
       Route::get('{id}/ads', ['as'=>'user.ads', 'uses'=>'UserController@myAds']);
     });
+    Route::group(['prefix' => 'admin'], function () {
+      Route::get('all-ads', ['as'=>'ads', 'uses'=>'AdminController@ads']);
+      Route::post('all-ads', ['as'=>'search.ad', 'uses'=>'AdminController@ads']);
+    });
     Route::resource('ad', 'AdsController');
     Route::get('ad/{id}/delete', 'AdsController@delete');
     Route::get('contact', ['as'=>'contact', 'uses'=>'HomeController@contact']);
