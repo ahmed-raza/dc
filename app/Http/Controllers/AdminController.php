@@ -11,9 +11,16 @@ use Auth;
 
 class AdminController extends Controller
 {
+  /**
+   * @param auth middleware for creating, editting, deleting operations
+   */
   public function __construct(){
       $this->middleware('auth', ['only'=>['create', 'edit', 'delete', 'index']]);
   }
+  /**
+   * @param  Ads method for admins.
+   * @return Ad listing view for authenticated admins.
+   */
   public function ads(SearchRequest $request){
     if ($request->isMethod('post') && Auth::check() && Auth::user()->rank == 'admin') {
       $title = $request->get('title');
