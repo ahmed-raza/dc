@@ -5,14 +5,16 @@
   <h2>{{ $ad->title }}</h2>
   {{ ($ad->approve == 0) ? 'Needs approval from admin.' : '' }}
   <div class="auth-info">
-    @if(Auth::user()->id == $ad->user['id'] || Auth::user()->rank == 'admin')
-      <div class="group-right pull-right">
-        <div class="actions">
-          {!! HTML::link('ad/'.$ad->id.'/edit', "Edit") !!}
-          <span>/</span>
-          {!! HTML::link('ad/'.$ad->id.'/delete', "Delete") !!}
+    @if(Auth::check())
+      @if(Auth::user()->id == $ad->user['id'] || Auth::user()->rank == 'admin')
+        <div class="group-right pull-right">
+          <div class="actions">
+            {!! HTML::link('ad/'.$ad->id.'/edit', "Edit") !!}
+            <span>/</span>
+            {!! HTML::link('ad/'.$ad->id.'/delete', "Delete") !!}
+          </div>
         </div>
-      </div>
+      @endif
     @endif
     <div class="group-left">
       <div class="username"><strong> {{ $ad->user['name'] }} </strong></div>

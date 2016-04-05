@@ -11,6 +11,7 @@ use App\Category;
 use Auth;
 use DB;
 use Image;
+use Mail;
 
 class AdsController extends Controller
 {
@@ -139,23 +140,26 @@ class AdsController extends Controller
                 'images' => $storeNames,
                 ]);
         }
-      if ($request->get("removeImages")) {
-        $removeImages = explode(',', $request->get("removeImages"));
-        $images = explode(',', $ad->images);
-        foreach ($removeImages as $key => $value) {
-            $key = array_search($value, $images);
-            if ($key !== false) {
-                unset($images[$key]);
-                $imploded = implode(',', $images);
-                Ad::where('id', $ad->id)->update([
-                    'images' => $imploded,
-                    ]);
-                unlink(base_path().'/public/images/ads/'.$ad->id.'/'.$value);
-                unlink(base_path().'/public/images/ads/'.$ad->id.'/'."t-".$value);
+        if ($request->get("removeImages")) {
+            $removeImages = explode(',', $request->get("removeImages"));
+            $images = explode(',', $ad->images);
+            foreach ($removeImages as $key => $value) {
+                $key = array_search($value, $images);
+                if ($key !== false) {
+                    unset($images[$key]);
+                    $imploded = implode(',', $images);
+                    Ad::where('id', $ad->id)->update([
+                        'images' => $imploded,
+                        ]);
+                    unlink(base_path().'/public/images/ads/'.$ad->id.'/'.$value);
+                    unlink(base_path().'/public/images/ads/'.$ad->id.'/'."t-".$value);
+                }
             }
         }
-    }
-      return redirect('ad/'.$ad->slug)->with('message', 'Ad updated.');
+        if (Auth::user()->rank == 'admin' && $request->get('approve') == 1) {
+            $this->sendMail($ad);
+        }
+        return redirect('ad/'.$ad->slug)->with('message', 'Ad updated.');
     }
 
     /**
@@ -199,5 +203,15 @@ class AdsController extends Controller
       else{
         return redirect('user/'.Auth::user()->id)->with('error', 'You don\'t own that article');
       }
+    }
+    private function sendMail($ad){
+        $data = array(
+          'link'=> "http://localhost:7777/ad/" . $ad->slug,
+        );
+        Mail::send(['html' => 'mail.template'], $data, function($message)use($ad){
+          $message->from('ahmed.raza@square63.com', 'Daily Classifieds');
+          $message->to($ad->user['email'])->subject("Ad approved");
+        });
+        return 'Message sent to user.';
     }
 }
