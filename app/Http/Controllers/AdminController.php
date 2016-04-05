@@ -25,7 +25,7 @@ class AdminController extends Controller
     if ($request->isMethod('post') && Auth::check() && Auth::user()->rank == 'admin') {
       $title = $request->get('title');
       $approve = $request->get('approve');
-      $ads = Ad::where('title','like','%'.$title.'%')->where('approve', $approve)->orderBy('title')->paginate(20);
+      $ads = Ad::where('title','like','%'.$title.'%')->where('approve', $approve)->orderBy('title')->paginate(15);
       return view('admin.ads', compact('ads', 'title', 'approve'));
     }
     $ads = Ad::orderBy('title')->paginate(15);

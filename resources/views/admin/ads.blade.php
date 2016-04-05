@@ -12,7 +12,7 @@
     {!! Form::close() !!}
   </fieldset>
   </div>
-
+  @if(count($ads) !== 0)
   <table class="table table-hover">
     <thead>
       <tr>
@@ -37,6 +37,9 @@
       @endforeach
     </tbody>
   </table>
+  @else
+    <div class="alert alert-warning">No ads found.</div>
+  @endif
   <div class="pagination">
     {!! $ads->render() !!}
   </div>
